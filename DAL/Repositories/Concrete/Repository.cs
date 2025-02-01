@@ -2,6 +2,7 @@
 using DAL.Repositories.Abstract;
 using Entity.Abstract;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq.Expressions;
 
 namespace DAL.Repositories.Concrete
@@ -23,7 +24,7 @@ namespace DAL.Repositories.Concrete
             {
                 await Table.AddAsync(entity);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception();
             }
@@ -64,7 +65,7 @@ namespace DAL.Repositories.Concrete
             catch (Exception)
             {
                 throw;
-            }            
+            }
         }
 
         public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties)
@@ -81,7 +82,7 @@ namespace DAL.Repositories.Concrete
                     foreach (var include in includeProperties)
                     {
                         query = query.Include(include);
-                    }                    
+                    }
                 }
                 return await query.ToListAsync();
             }
@@ -108,7 +109,32 @@ namespace DAL.Repositories.Concrete
 
                 throw;
             }
-            
+
+        }
+
+        public async Task<T> GetByGuidAsync(object id, params Expression<Func<T, object>>[] includeProperties)
+        {
+            try
+            {
+                IQueryable<T> query = Table;
+
+                query = query.Where(x => x.Id == (Guid)id);
+
+                if (includeProperties.Any())
+                {
+                    foreach (var include in includeProperties)
+                    {
+                        query = query.Include(include);
+                    }
+                }
+                return await query.SingleOrDefaultAsync();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<T> UpdateAsync(T entity)
@@ -123,7 +149,7 @@ namespace DAL.Repositories.Concrete
 
                 throw;
             }
-           
+
         }
     }
 }

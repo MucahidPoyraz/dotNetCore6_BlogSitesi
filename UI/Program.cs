@@ -3,6 +3,7 @@ using DAL.Context;
 using DAL.Extensions;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Identity;
+using NToastNotify;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,7 +32,11 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied");
 });
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews().AddNToastNotifyToastr(new ToastrOptions()
+{
+    PositionClass = ToastPositions.TopRight,
+    TimeOut = 3000,
+}).AddRazorRuntimeCompilation();
 
 
 var app = builder.Build();

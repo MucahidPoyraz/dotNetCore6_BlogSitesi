@@ -1,6 +1,7 @@
 ﻿using BL.Abstract;
 using DAL.UOW;
 using Entity.Abstract;
+using System;
 using System.Linq.Expressions;
 
 namespace BL.Concrete
@@ -47,6 +48,11 @@ namespace BL.Concrete
         public async Task<T> GetByGuidAsync(object id)
         {
             return await _uow.GetRepository<T>().GetByGuidAsync(id);
+        }
+
+        public async Task<T> GetByGuidAsync(object id, params Expression<Func<T, object>>[] includeProperties)
+        {
+            return await _uow.GetRepository<T>().GetByGuidAsync(id, includeProperties);
         }
 
         public async Task<T> UpdateAsync(T entity)
