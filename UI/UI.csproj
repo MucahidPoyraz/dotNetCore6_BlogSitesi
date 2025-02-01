@@ -7,14 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.36" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.36">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\DTOs\DTOs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\sneat\.github\workflows\handle-new-issue-comment.yml" />
+    <None Include="wwwroot\sneat\.github\workflows\handle-new-issue.yml" />
+    <None Include="wwwroot\sneat\.github\workflows\issue-staler.yml" />
   </ItemGroup>
 
 </Project>

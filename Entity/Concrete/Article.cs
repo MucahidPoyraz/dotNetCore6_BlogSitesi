@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace Entity.Concrete
+﻿namespace Entity.Concrete
 {
     public class Article : BaseEntity
     {
@@ -17,6 +10,10 @@ namespace Entity.Concrete
         public Category Category { get; set; }
 
         public Guid? ImageId { get; set; }
-        public Image Image { get; set; }
+        public Image? Image { get; set; }
+
+        public Guid AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
+
 }
